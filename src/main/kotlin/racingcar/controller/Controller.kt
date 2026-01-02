@@ -11,6 +11,7 @@ class Controller {
 
     fun run() {
         val race = beginning()
+        middle(race)
     }
 
     fun beginning(): Race {
@@ -26,7 +27,12 @@ class Controller {
         return Race(cars, tryCount)
     }
 
-    fun middle() {
+    fun middle(race: Race) {
+        outputView.guideResult()
+
+        for (i in 1 .. race.tryCount) {
+            race.runRound(race.cars)
+        }
     }
 
     private fun getValidNames(): List<String> {
