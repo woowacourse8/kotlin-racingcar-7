@@ -13,6 +13,19 @@ data class Race(val cars: List<Car>, val tryCount: Int) {
         }
     }
 
+    fun findWinner(): List<Car> {
+        val maxPosition = cars.maxOf { car ->
+            car.position
+        }
+
+        val winners = cars.map { car ->
+            car.position == maxPosition
+            car
+        }
+
+        return winners
+    }
+
     private fun moveOrStop(car: Car) {
         val randomNum = Randoms.pickNumberInRange(0,9)
         if (randomNum >= 4)

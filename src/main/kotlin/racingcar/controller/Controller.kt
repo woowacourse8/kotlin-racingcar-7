@@ -35,6 +35,10 @@ class Controller {
         }
     }
 
+    fun end(race: Race) {
+        val winners = race.findWinner()
+    }
+
     private fun getValidNames(): List<String> {
         return try {
             inputView.readNames()
