@@ -4,25 +4,22 @@ import camp.nextstep.edu.missionutils.Console
 
 class InputView {
     fun readNames(): List<String> {
-        val inputNames = Console.readLine() ?: throw IllegalArgumentException("[Error] 입력값이 없습니다.")
-        val names = checkCarNames(inputNames)
-        return names
+        val input = Console.readLine() ?: throw IllegalArgumentException("[Error] 입력값이 없습니다.")
+        return input
+            .split(",")
+            .map { it.trim() }
+            .apply { validateNames(this) }
     }
 
     fun readTryCount(): Int {
-        val inputTryCount = Console.readLine()
-        val tryCount = inputTryCount.toIntOrNull() ?: throw IllegalArgumentException("[Error] 숫자 값이 입력되지 않았습니다.")
-        return tryCount
+        val input = Console.readLine()
+        return input.toIntOrNull() ?: throw IllegalArgumentException("[Error] 숫자를 입력해 주세요.")
     }
 
-    private fun checkCarNames(inputNames: String): List<String> {
-        val names = inputNames.split(",").map { it.trim() }
-
+    private fun validateNames(names: List<String>) {
         names.forEach { name ->
             require(name.isNotEmpty()) { "[Error] 이름은 빈 값일 수 없습니다." }
             require(name.length <= 5) { "[Error] 자동차 이름은 5글자를 초과할 수 없습니다. " }
         }
-
-        return names
     }
 }

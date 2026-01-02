@@ -6,37 +6,36 @@ import racingcar.view.InputView
 import racingcar.view.OutputView
 
 class Controller {
-    val outputView = OutputView()
     val inputView = InputView()
+    val outputView = OutputView()
 
     fun run() {
-        val race = beginning()
-        middle(race)
-        end(race)
+        val race = setupRace()
+        playGame(race)
+        concludeGame(race)
     }
 
-    fun beginning(): Race {
+    private fun setupRace(): Race {
         outputView.guideName()
         val names = inputView.readNames()
+        val cars = names.map { Car(it) }
+
+        return Race(cars)
+    }
+
+    private fun playGame(race: Race) {
         outputView.guideTryCount()
         val tryCount = inputView.readTryCount()
 
-        val cars = names.map { name ->
-            val car = Car(name)
-            car
-        }
-        return Race(cars, tryCount)
-    }
-
-    fun middle(race: Race) {
         outputView.guideResult()
 
-        for (i in 1..race.tryCount) {
-            race.runRound(race.cars)
+        repeat(tryCount) {
+            race.playRound()
+            outputView.printRoundResult(race.cars)
         }
     }
 
-    fun end(race: Race) {
+    private fun concludeGame(race: Race) {
         val winners = race.findWinner()
         outputView.printWinner(winners)
     }
