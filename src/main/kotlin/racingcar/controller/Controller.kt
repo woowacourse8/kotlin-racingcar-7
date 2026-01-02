@@ -12,6 +12,7 @@ class Controller {
     fun run() {
         val race = beginning()
         middle(race)
+        end(race)
     }
 
     fun beginning(): Race {

@@ -18,9 +18,8 @@ data class Race(val cars: List<Car>, val tryCount: Int) {
             car.position
         }
 
-        val winners = cars.map { car ->
+        val winners = cars.filter { car ->
             car.position == maxPosition
-            car
         }
 
         return winners
