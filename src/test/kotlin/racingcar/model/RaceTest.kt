@@ -2,7 +2,6 @@ package racingcar.model
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import kotlin.math.exp
 
 class RaceTest {
     @Test

@@ -16,10 +16,11 @@ class InputView {
     }
 
     private fun checkCarNames(inputNames: String): List<String> {
-        val names = inputNames.split(",")
+        val names = inputNames.split(",").map { it.trim() }
 
-        names.forEach { n ->
-            require(n.length <= 5)
+        names.forEach { name ->
+            require(name.isNotEmpty()) { "[Error] 이름은 빈 값일 수 없습니다." }
+            require(name.length <= 5) { "[Error] 자동차 이름은 5글자를 초과할 수 없습니다. " }
         }
 
         return names

@@ -11,6 +11,13 @@ class OutputView {
 
     fun printResult(car: Car) = println(formatCarResult(car))
 
+    fun printWinner(winners: List<Car>) {
+        val winners = winners.map { car ->
+            car.name
+        }
+        println("최종 우승자 : ${winners.joinToString(",")}")
+    }
+
     fun formatCarResult(car: Car): String {
         return "${car.name} : ${"-".repeat(car.position)}"
     }

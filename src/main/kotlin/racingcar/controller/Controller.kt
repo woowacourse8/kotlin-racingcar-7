@@ -17,9 +17,9 @@ class Controller {
 
     fun beginning(): Race {
         outputView.guideName()
-        val names = getValidNames()
+        val names = inputView.readNames()
         outputView.guideTryCount()
-        val tryCount = getValidTryCount()
+        val tryCount = inputView.readTryCount()
 
         val cars = names.map { name ->
             val car = Car(name)
@@ -31,30 +31,13 @@ class Controller {
     fun middle(race: Race) {
         outputView.guideResult()
 
-        for (i in 1 .. race.tryCount) {
+        for (i in 1..race.tryCount) {
             race.runRound(race.cars)
         }
     }
 
     fun end(race: Race) {
         val winners = race.findWinner()
-    }
-
-    private fun getValidNames(): List<String> {
-        return try {
-            inputView.readNames()
-        } catch (e: IllegalArgumentException) {
-            println("[Error] 입력값이 잘못됐습니다.")
-            getValidNames()
-        }
-    }
-
-    private fun getValidTryCount(): Int {
-        return try {
-            inputView.readTryCount()
-        } catch (e: IllegalArgumentException) {
-            println("[Error] 입력값이 잘못됐습니다.")
-            getValidTryCount()
-        }
+        outputView.printWinner(winners)
     }
 }

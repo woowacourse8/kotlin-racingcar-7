@@ -26,7 +26,7 @@ data class Race(val cars: List<Car>, val tryCount: Int) {
     }
 
     private fun moveOrStop(car: Car) {
-        val randomNum = Randoms.pickNumberInRange(0,9)
+        val randomNum = Randoms.pickNumberInRange(0, 9)
         if (randomNum >= 4)
             car.position++
     }
